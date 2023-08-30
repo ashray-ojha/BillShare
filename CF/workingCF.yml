@@ -1,0 +1,342 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "CloudFormation Template for Frontend Deployment with Lambda and S3"
+Resources:
+  S3KMS:
+    Type: "AWS::KMS::Key"
+    Properties:
+      Description: "KMS Key for Encryption at Rest"
+      KeyPolicy:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "*"
+            Resource: "*"
+            Principal:
+              AWS: !Sub "arn:aws:sts::286240816134:assumed-role/voclabs/user2565798=Ashish_Ojha"
+          - Effect: "Allow"
+            Action: "*"
+            Resource: "*"
+            Principal:
+              AWS: "arn:aws:iam::286240816134:role/LabRole"
+          - Effect: "Allow"
+            Action: "kms:*"
+            Resource: "*"
+            Principal:
+              AWS: "arn:aws:iam::286240816134:root"
+          - Effect: "Allow"
+            Action:
+              - "kms:Decrypt"
+              - "kms:Encrypt"
+            Resource: "*"
+            Principal:
+              Service: "s3.amazonaws.com"
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ashish-term-bucket-b00931967
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: ["*"]
+            AllowedMethods: ["PUT", "POST", "DELETE", "GET"]
+            AllowedOrigins: ["*"]
+            MaxAge: 300
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: "aws:kms"
+              KMSMasterKeyID: !Ref S3KMS
+    DeletionPolicy: Delete
+  LambdaExtract:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      FunctionName: "lambda-extract"
+      Runtime: "nodejs18.x"
+      Role: "arn:aws:iam::286240816134:role/LabRole"
+      Handler: "index.handler"
+      Code:
+        S3Bucket: "code-bucket-ashish"
+        S3Key: "deploy_extract.zip"
+      Timeout: 20
+  LambdaEmail:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      FunctionName: "lambda-email"
+      Runtime: "nodejs18.x"
+      Role: "arn:aws:iam::286240816134:role/LabRole"
+      Handler: "index.handler"
+      Code:
+        S3Bucket: "code-bucket-ashish"
+        S3Key: "deploy_email.zip"
+      Timeout: 20
+  TermProjApi:
+    Type: "AWS::ApiGateway::RestApi"
+    Properties:
+      Name: "termProjApi"
+  ExtractResource:
+    Type: "AWS::ApiGateway::Resource"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+      ParentId:
+        Fn::GetAtt:
+          - "TermProjApi"
+          - "RootResourceId"
+      PathPart: "extract"
+  ApiKey:
+    Type: "AWS::ApiGateway::ApiKey"
+    DependsOn: "ApiGatewayStage"
+    Properties:
+      Name: "ApiKeyTerm"
+      Description: "API Key for TermProjApi"
+      Enabled: true
+      StageKeys:
+        - RestApiId: !Ref TermProjApi
+          StageName: "prod"
+  UsagePlan:
+    Type: "AWS::ApiGateway::UsagePlan"
+    DependsOn: ["ApiKey", "EmailMethod", "ExtractMethod"]
+    Properties:
+      ApiStages:
+        - ApiId: !Ref TermProjApi
+          Stage: "prod"
+      Description: "Usage plan for TermProjApi"
+      Quota:
+        Limit: 1000
+        Period: "MONTH"
+      Throttle:
+        BurstLimit: 5
+        RateLimit: 100
+
+  ApiUsagePlanKey:
+    Type: "AWS::ApiGateway::UsagePlanKey"
+    Properties:
+      KeyId: !Ref ApiKey
+      KeyType: "API_KEY"
+      UsagePlanId: !Ref UsagePlan
+  EmailResource:
+    Type: "AWS::ApiGateway::Resource"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+      ParentId:
+        Fn::GetAtt:
+          - "TermProjApi"
+          - "RootResourceId"
+      PathPart: "email"
+  OptionsExtractMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      RestApiId:
+        Ref: "TermProjApi"
+      ResourceId:
+        Ref: "ExtractResource"
+      HttpMethod: "OPTIONS"
+      Integration:
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'POST'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              "application/json": ""
+        PassthroughBehavior: "WHEN_NO_MATCH"
+        RequestTemplates:
+          "application/json": '{"statusCode": 200}'
+        Type: "MOCK"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+          ResponseModels:
+            "application/json": "Empty"
+  ExtractMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+      ResourceId:
+        Ref: "ExtractResource"
+      AuthorizationType: "NONE"
+      ApiKeyRequired: true
+      HttpMethod: "POST"
+      Integration:
+        Type: "AWS"
+        IntegrationHttpMethod: "POST"
+        Uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaExtract.Arn}/invocations"
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseTemplates:
+              "application/json": "$input.json('$')"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        RequestTemplates:
+          "application/json": "$input.json('$')"
+      RequestParameters:
+        method.request.querystring.name: false
+      MethodResponses:
+        - StatusCode: "200"
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+  OptionsEmailMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: "NONE"
+      RestApiId:
+        Ref: "TermProjApi"
+      ResourceId:
+        Ref: "EmailResource"
+      HttpMethod: "OPTIONS"
+      Integration:
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key'"
+              method.response.header.Access-Control-Allow-Methods: "'POST'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+            ResponseTemplates:
+              "application/json": ""
+        PassthroughBehavior: "WHEN_NO_MATCH"
+        RequestTemplates:
+          "application/json": '{"statusCode": 200}'
+        Type: "MOCK"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+          ResponseModels:
+            "application/json": "Empty"
+  EmailMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+      ResourceId:
+        Ref: "EmailResource"
+      AuthorizationType: "NONE"
+      ApiKeyRequired: true
+      HttpMethod: "POST"
+      Integration:
+        Type: "AWS"
+        IntegrationHttpMethod: "POST"
+        Uri:
+          Fn::Sub: "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaEmail.Arn}/invocations"
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseTemplates:
+              "application/json": "$input.json('$')"
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Methods: "'POST,OPTIONS'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        RequestTemplates:
+          "application/json": "$input.json('$')"
+      RequestParameters:
+        method.request.querystring.name: false
+      MethodResponses:
+        - StatusCode: "200"
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: true
+            method.response.header.Access-Control-Allow-Methods: true
+            method.response.header.Access-Control-Allow-Origin: true
+  ApiGatewayDeployment:
+    Type: "AWS::ApiGateway::Deployment"
+    DependsOn:
+      - "ExtractMethod"
+      - "EmailMethod"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+  ApiGatewayStage:
+    Type: "AWS::ApiGateway::Stage"
+    DependsOn: "ApiGatewayDeployment"
+    Properties:
+      RestApiId:
+        Ref: "TermProjApi"
+      DeploymentId:
+        Ref: "ApiGatewayDeployment"
+      StageName: "prod"
+      Description: "Production Stage"
+  LambdaExtractPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+          - "LambdaExtract"
+          - "Arn"
+      Action: "lambda:InvokeFunction"
+      Principal: "apigateway.amazonaws.com"
+      SourceArn:
+        Fn::Sub: "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${TermProjApi}/*/POST/extract"
+  LambdaEmailPermission:
+    Type: "AWS::Lambda::Permission"
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+          - "LambdaEmail"
+          - "Arn"
+      Action: "lambda:InvokeFunction"
+      Principal: "apigateway.amazonaws.com"
+      SourceArn:
+        Fn::Sub: "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${TermProjApi}/*/POST/email"
+  SecurityGroupTerm:
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupDescription: "Security group for the EC2 instance"
+      SecurityGroupIngress:
+        - IpProtocol: "tcp"
+          FromPort: 22
+          ToPort: 22
+          CidrIp: "0.0.0.0/0"
+        - IpProtocol: "tcp"
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: "0.0.0.0/0"
+  FrontendInstance:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      InstanceType: "t2.small"
+      ImageId: "ami-053b0d53c279acc90"
+      KeyName: "termkey"
+      SecurityGroupIds:
+        - Ref : "SecurityGroupTerm"
+      Tags:
+        - Key: Name
+          Value: FrontendInstance
+      UserData:
+          Fn::Base64: !Sub |
+            #!/bin/bash -xe
+            sudo apt-get update -y
+            sudo apt install git -y
+            sudo apt-get update
+            sudo apt-get install -y nodejs npm
+            git clone https://gitlab-ci-token:glpat-TV6ZV8oyK1kLDPs7DFbj@git.cs.dal.ca/aojha/termproject.git  /home/ubuntu/app
+            cd /home/ubuntu/app
+            #sudo chown -R ubuntu:ubuntu /home/ubuntu/app
+            echo "REACT_APP_API_GATEWAY_URL=${TermProjApi}" >> /home/ubuntu/app/.env.local
+            echo "REACT_APP_API_GATEWAY_KEY_ID=${ApiKey}" >> /home/ubuntu/app/.env.local
+            npm install >> /var/log/startup.log 2>&1
+            npm start >> /var/log/startup.log 2>&1
+Outputs:
+  APIGatewayURL:
+    Description: "API Gateway URL"
+    Value: 
+      Fn::Sub:
+        - "https://${TermProjApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+        - { TermProjApi: !Ref "TermProjApi" }
+  EC2PublicIP:
+    Description: "Public IP address of the EC2 instance"
+    Value: !GetAtt FrontendInstance.PublicIp
+  APIKeyID:
+    Description: "API Key ID"
+    Value: !Ref ApiKey

@@ -1,0 +1,368 @@
+[
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "ADDRESS" },
+    "ValueDetection": {
+      "Confidence": 99.94216918945312,
+      "Geometry": { "Object": "value" },
+      "Text": "1521 W GRANADA BLVD\nORMOND BEACH FL 32174"
+    }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "STREET" },
+    "ValueDetection": {
+      "Confidence": 99.99040985107422,
+      "Geometry": { "Object": "value" },
+      "Text": "1521 W GRANADA BLVD"
+    }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "CITY" },
+    "ValueDetection": {
+      "Confidence": 99.9974365234375,
+      "Geometry": { "Object": "value" },
+      "Text": "ORMOND BEACH"
+    }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "STATE" },
+    "ValueDetection": { "Confidence": 99.98211669921875, "Geometry": { "Object": "value" }, "Text": "FL" }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "ZIP_CODE" },
+    "ValueDetection": {
+      "Confidence": 99.99455261230469,
+      "Geometry": { "Object": "value" },
+      "Text": "32174"
+    }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "ADDRESS_BLOCK" },
+    "ValueDetection": {
+      "Confidence": 99.99140167236328,
+      "Geometry": { "Object": "value" },
+      "Text": "1521 W GRANADA BLVD\nORMOND BEACH FL 32174"
+    }
+  },
+  {
+    "GroupProperties": [ { "Object": "value" } ],
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.52808380126953, "Text": "NAME" },
+    "ValueDetection": {
+      "Confidence": 99.46102142333984,
+      "Geometry": { "Object": "value" },
+      "Text": "Walmart"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.22608947753906,
+      "Geometry": { "Object": "value" },
+      "Text": "DEBIT TEND"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.23101806640625, "Text": "AMOUNT_PAID" },
+    "ValueDetection": {
+      "Confidence": 99.22140502929688,
+      "Geometry": { "Object": "value" },
+      "Text": "15.18"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 52.4516716003418,
+      "Geometry": { "Object": "value" },
+      "Text": "TOTAL PURCHASE"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 52.45176696777344, "Text": "AMOUNT_PAID" },
+    "ValueDetection": {
+      "Confidence": 52.447025299072266,
+      "Geometry": { "Object": "value" },
+      "Text": "15.18"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99576568603516, "Text": "INVOICE_RECEIPT_DATE" },
+    "ValueDetection": {
+      "Confidence": 99.88348388671875,
+      "Geometry": { "Object": "value" },
+      "Text": "11/11/18"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.86175537109375, "Text": "INVOICE_RECEIPT_DATE" },
+    "ValueDetection": {
+      "Confidence": 99.842529296875,
+      "Geometry": { "Object": "value" },
+      "Text": "11/11/18"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 94.18460845947266, "Geometry": { "Object": "value" }, "Text": "TR#" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 94.21757507324219, "Text": "INVOICE_RECEIPT_ID" },
+    "ValueDetection": {
+      "Confidence": 94.21173095703125,
+      "Geometry": { "Object": "value" },
+      "Text": "02619"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.94560241699219,
+      "Geometry": { "Object": "value" },
+      "Text": "SUBTOTAL"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.96124267578125, "Text": "SUBTOTAL" },
+    "ValueDetection": {
+      "Confidence": 99.95468139648438,
+      "Geometry": { "Object": "value" },
+      "Text": "14.25"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.58233642578125,
+      "Geometry": { "Object": "value" },
+      "Text": "TAX 1 6.500 %"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.67102813720703, "Text": "TAX" },
+    "ValueDetection": {
+      "Confidence": 99.66641998291016,
+      "Geometry": { "Object": "value" },
+      "Text": "0.93"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.97758483886719,
+      "Geometry": { "Object": "value" },
+      "Text": "TOTAL"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.98184204101562, "Text": "TOTAL" },
+    "ValueDetection": {
+      "Confidence": 99.97254180908203,
+      "Geometry": { "Object": "value" },
+      "Text": "15.18"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.95000457763672, "Text": "VENDOR_ADDRESS" },
+    "ValueDetection": {
+      "Confidence": 99.94216918945312,
+      "Geometry": { "Object": "value" },
+      "Text": "1521 W GRANADA BLVD\nORMOND BEACH FL 32174"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.52808380126953, "Text": "VENDOR_NAME" },
+    "ValueDetection": {
+      "Confidence": 99.46102142333984,
+      "Geometry": { "Object": "value" },
+      "Text": "Walmart"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 85.55376434326172, "Text": "VENDOR_PHONE" },
+    "ValueDetection": {
+      "Confidence": 84.63400268554688,
+      "Geometry": { "Object": "value" },
+      "Text": "386-672-2104"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.34685516357422, "Text": "VENDOR_URL" },
+    "ValueDetection": {
+      "Confidence": 99.34081268310547,
+      "Geometry": { "Object": "value" },
+      "Text": "Vudu.com/WatchFree"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 87.9254379272461, "Geometry": { "Object": "value" }, "Text": "Mgr :" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.84178161621094, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.8250732421875,
+      "Geometry": { "Object": "value" },
+      "Text": "ROBERT ROGERS"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.93301391601562, "Geometry": { "Object": "value" }, "Text": "ST#" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99141693115234, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.94401550292969,
+      "Geometry": { "Object": "value" },
+      "Text": "00613"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.96268463134766, "Geometry": { "Object": "value" }, "Text": "OP#" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99287414550781, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.98872375488281,
+      "Geometry": { "Object": "value" },
+      "Text": "007671"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.99574279785156, "Geometry": { "Object": "value" }, "Text": "TE#" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99934387207031, "Text": "OTHER" },
+    "ValueDetection": { "Confidence": 99.9861831665039, "Geometry": { "Object": "value" }, "Text": "07" }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 98.96405792236328,
+      "Geometry": { "Object": "value" },
+      "Text": "TAX 1"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.06592559814453, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.05705261230469,
+      "Geometry": { "Object": "value" },
+      "Text": "6.500 %"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.99468994140625,
+      "Geometry": { "Object": "value" },
+      "Text": "CHANGE DUE"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99630737304688, "Text": "OTHER" },
+    "ValueDetection": { "Confidence": 99.99180603027344, "Geometry": { "Object": "value" }, "Text": "0.00" }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 98.06343078613281,
+      "Geometry": { "Object": "value" },
+      "Text": "US DEBIT:"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 98.05671691894531, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 98.05623626708984,
+      "Geometry": { "Object": "value" },
+      "Text": "7641 I 3 REF"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.88628387451172,
+      "Geometry": { "Object": "value" },
+      "Text": "REF #"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.9186782836914, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.89837646484375,
+      "Geometry": { "Object": "value" },
+      "Text": "831600869690"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.95108032226562,
+      "Geometry": { "Object": "value" },
+      "Text": "NETWORK ID."
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.96272277832031, "Text": "OTHER" },
+    "ValueDetection": { "Confidence": 99.96206665039062, "Geometry": { "Object": "value" }, "Text": "0081" }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.98793029785156,
+      "Geometry": { "Object": "value" },
+      "Text": "APPR CODE"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.98921966552734, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.9875717163086,
+      "Geometry": { "Object": "value" },
+      "Text": "870411"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.96329498291016, "Geometry": { "Object": "value" }, "Text": "AID" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.97531127929688, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.55487823486328,
+      "Geometry": { "Object": "value" },
+      "Text": "A0000000980840"
+    }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.98971557617188, "Geometry": { "Object": "value" }, "Text": "TC" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99339294433594, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.77933502197266,
+      "Geometry": { "Object": "value" },
+      "Text": "9DE3EC353C6D6ADB"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.87991333007812,
+      "Geometry": { "Object": "value" },
+      "Text": "TERMINAL #"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.9762191772461, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.96263885498047,
+      "Geometry": { "Object": "value" },
+      "Text": "MX716047"
+    }
+  },
+  {
+    "LabelDetection": {
+      "Confidence": 99.95610046386719,
+      "Geometry": { "Object": "value" },
+      "Text": "# ITEMS SOLD"
+    },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.975341796875, "Text": "OTHER" },
+    "ValueDetection": { "Confidence": 99.90734100341797, "Geometry": { "Object": "value" }, "Text": "3" }
+  },
+  {
+    "LabelDetection": { "Confidence": 99.98258209228516, "Geometry": { "Object": "value" }, "Text": "TC#" },
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99592590332031, "Text": "OTHER" },
+    "ValueDetection": {
+      "Confidence": 99.97537994384766,
+      "Geometry": { "Object": "value" },
+      "Text": "4903 0007 3123 6600 8297"
+    }
+  }
+]

@@ -1,0 +1,110 @@
+
+[{
+    "PageNumber": 1,
+    "Type": { "Confidence": 50.22947311401367, "Text": "PRODUCT_CODE" },
+    "ValueDetection": {
+      "Confidence": 50.208866119384766,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(2)06038315750 PC"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 96.49240112304688, "Text": "ITEM" },
+    "ValueDetection": {
+      "Confidence": 96.47270965576172,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(2)06038315750 PC DIPP GRANOLA HMRJ"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99370574951172, "Text": "PRICE" },
+    "ValueDetection": {
+      "Confidence": 99.96756744384766,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "13.16"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 92.98851776123047, "Text": "QUANTITY" },
+    "ValueDetection": {
+      "Confidence": 92.98399353027344,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "$3.29 ea"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.92096710205078, "Text": "UNIT_PRICE" },
+    "ValueDetection": {
+      "Confidence": 99.78177642822266,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "$3.29 ea"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 96.54691314697266, "Text": "EXPENSE_ROW" },
+    "ValueDetection": {
+      "Confidence": 92.11932373046875,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(2)06038315750 PC DIPP GRANOLA HMRJ\n + $3.29 ea or 2/$5.00 KB\n + 4 @ $3.29 ea 13.16"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 74.9513168334961, "Text": "PRODUCT_CODE" },
+    "ValueDetection": {
+      "Confidence": 74.88780975341797,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(3)06457901005"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.53816223144531, "Text": "ITEM" },
+    "ValueDetection": {
+      "Confidence": 99.51103210449219,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(3)06457901005 SHANA CHAPAT WM"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99873352050781, "Text": "PRICE" },
+    "ValueDetection": {
+      "Confidence": 99.9959945678711,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "9.87"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.98948669433594, "Text": "QUANTITY" },
+    "ValueDetection": {
+      "Confidence": 99.68452453613281,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "3"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.99434661865234, "Text": "UNIT_PRICE" },
+    "ValueDetection": {
+      "Confidence": 99.9041748046875,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "$3.29"
+    }
+  },
+  {
+    "PageNumber": 1,
+    "Type": { "Confidence": 99.29456329345703, "Text": "EXPENSE_ROW" },
+    "ValueDetection": {
+      "Confidence": 99.13285827636719,
+      "Geometry": { "BoundingBox": ["Object"], "Polygon": ["Array"] },
+      "Text": "CD(3)06457901005 SHANA CHAPAT WM MRJ\n3 @ $3.29 9.87"
+    }
+  }
+]
